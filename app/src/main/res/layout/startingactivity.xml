@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    android:gravity="center">
+
+    <TextView
+        android:text="Choose your Avatar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="normal|bold"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="40dp"
+        android:textColor="#fff" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        app:srcCompat="@drawable/man"
+        android:id="@+id/imageView"
+        android:layout_height="150dp"
+        android:layout_margin="10dp" />
+
+    <TextView
+        android:text="Or"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:textStyle="normal|bold"
+        android:layout_margin="10dp"
+        android:textColor="#fff" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        app:srcCompat="@drawable/woman"
+        android:id="@+id/imageView2"
+        android:layout_margin="10dp" />
+</LinearLayout>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        card_view:contentPadding="10dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="3dp">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true">
+
+                <TextView
+                    android:text="TextView"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView"
+                    android:layout_alignParentStart="false"
+                    android:layout_centerVertical="true"
+                    android:textAlignment="viewStart"
+                    android:textColor="#111"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_width="155dp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right">
+
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:orientation="horizontal"
+                    android:id="@+id/rg">
+
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton"
+                        android:textSize="10sp"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        android:layout_marginRight="4dp"
+                        android:text="P"
+                        card_view:buttonTint="@color/brown" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton2"
+                        android:layout_marginRight="4dp"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        android:text="AB"
+                        android:textSize="10sp"
+                        card_view:buttonTint="@color/brown" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton3"
+                        android:layout_marginRight="4dp"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        android:text="OD"
+                        android:textSize="10sp"
+                        card_view:buttonTint="@color/brown" />
+                    <RadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton4"
+                        android:layout_marginRight="7dp"
+                        android:scaleX="0.75"
+                        android:scaleY="0.75"
+                        android:text="L"
+                        android:textSize="10sp"
+                        card_view:buttonTint="@color/brown" />
+                </RadioGroup>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>

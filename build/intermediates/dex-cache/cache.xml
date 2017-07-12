@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run_890daec971c7d89905fa81ad53684c9721f0ccab\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="9fa70ba749dc8234930c8903758f019d486dea50">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_8d302fbdcc59eb8922d7dc4506c93e6d29f1e63c\classes.dex" />
+    </item>
+
+</items>
