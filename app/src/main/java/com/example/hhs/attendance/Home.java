@@ -1,5 +1,6 @@
 package com.example.hhs.attendance;
 
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -27,6 +28,10 @@ public class Home extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        final SharedPreferences.Editor editor = pref.edit();
+        String gender = pref.getString("gender","");
+        String name = pref.getString("uname","");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,18 +58,18 @@ public class Home extends AppCompatActivity
 
 
         ImageView nav_image = (ImageView) hView.findViewById(R.id.imageView);
-        if(StartingActivity.img=="male")
+        if(gender.equals("Mr"))
         {
-            nav_user.setText("Male");
+            nav_user.setText("Mr "+name);
             nav_image.setImageResource(R.drawable.man);
         }
         else
         {
-            nav_user.setText("Female");
+            nav_user.setText("Mrs "+name);
             nav_image.setImageResource(R.drawable.woman);
         }
 
-        nav_user.setText(StartingActivity2.name);
+
         nav_user.setTypeface(face);
 //        nav_classes.setTypeface(face);
 //        nav_attendance.setTypeface(face);
