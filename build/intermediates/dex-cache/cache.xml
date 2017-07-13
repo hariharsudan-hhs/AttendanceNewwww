@@ -3,183 +3,12 @@
 
     <item
         is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\c67117e49892645269aad39aa703c63e31227672\output\jars\classes.jar"
+        jar="C:\Users\msuba\.android\build-cache\b0207b68bb9d813cb2e94681fd55a9d83434be87\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_31105b8541ef3a0e3f7a6f19c00c3f9094fae6ae\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\ec8393a36641ff3696e6c6796f0c717f5c7d4632\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_253045fb783941702b1ed91af0ccbdda45cb7f44\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.2.2\285cb9c666f0f0f3dd8a1be04e1f457eb7b15113\jackson-annotations-2.2.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\jackson-annotations-2.2.2_8e61eb50b3ca0547189a08fb7fe6039d35b52f25\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-android\2.4.0\f00bc767918ad9c89e5c13e25706d033a58e13c2\firebase-client-android-2.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="f00bc767918ad9c89e5c13e25706d033a58e13c2">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\firebase-client-android-2.4.0_d301b6f83946453becb78a0de12f908e9205ea34\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.firebase\tubesock\0.0.12\6ec0bbd3e161a73ed672284b587fd32309a86d7a\tubesock-0.0.12.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="6ec0bbd3e161a73ed672284b587fd32309a86d7a">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\tubesock-0.0.12_13ab8e410ef63a44b0307be48246abab62bf4cc1\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\4fb44a9e2af6edd51eb4fb8a79893f014ab69995\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2c1d9fbe7d2f686b3dcdbc3f63a983a211401ca3">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_517ae457b450505f1844cff5e75a1bc50241a707\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\1beae7651adc51ede7b2c00890d361f988715cb1\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4262bcd49b19d558c241bf8c68470fcc6fa1ac84">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_25436dab34a8d3c3b18b603715f41ce0d24584f7\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\fa57e00d7552d212cac390e58457620674eaaaeb\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="fc5624185d414a0f572bfb3df7d841ceb335aef9">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_35ea5c5ac7fe772448fa35c53352b4c38a33ef56\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-jvm\2.4.0\558e074f136fee609b8758480ecd00e286595137\firebase-client-jvm-2.4.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="558e074f136fee609b8758480ecd00e286595137">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\firebase-client-jvm-2.4.0_f5cfca309cbc80104a816a40a90bc5e1d4349123\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\07f077be4363c5e94caff9c6a3453e50d4664f47\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_073591ede4a7ff6ec97b7157c417af511772d1c6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\cbb87e5a1edef1ba6317b6670ad219b050e6ab47\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4802b21cc23549f7eba5edb802241091ad998b35">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a39c3c57d9a70924e3e06ad500267ff9712cdf00\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-25.2.0_de93156db434439fc1c143eb008661a319246974\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\afccd8af7d00bea165f1a2f8b626a884afd147c7\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c21697a1e59c69728629b54de1a8391eb602fa18\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\59a2f6c09a8196946b7f57af97e08daa0369337b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_90c478153ec37510079d8dcd964c66a61ad167f6\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\8680fbdc16b69458eca2330b52881448811fa58b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="a71be5f29a1c1e3fd3e84472742668f101a5b936">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_17bc671fb0e72901974a4426f1635acfca903bdb\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\308bc8abecec41d726facf0957a34962f98aa917\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_64d3c1f3854958491a10fd9f0fc30576ab1e38ae\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\6ccd3601aa65acffe8928ec2b48183cacdd73fad\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="86baa7d1051901fc1b8e7f596732f71f32175bde">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_992e326dc36ecb67ac34112286d275dbe30c3793\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="042d08e2db558cd0513c36994036e1b5d7b3f164">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_8d302fbdcc59eb8922d7dc4506c93e6d29f1e63c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.2.2\d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b\jackson-core-2.2.2.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\jackson-core-2.2.2_267f6b7b2da33227068a73f35b50a1d7fe8a5954\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\01468e056ea42649ac596d6c9b1e6c715a60ea1b\output\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="25.0.2"
-        sha1="2737331564e0084fc0eb30ba500564a6dbe5e98f">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4cd96554046aa62dba03c75f81554bb5dbbcf0f9\classes.dex" />
+        sha1="18b5697c65c4fe5b7381613b8b8ae9ac52e26fa7">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4e37cf830157c6a0dce00478ef04a9f0574b9060\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -192,21 +21,84 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\msuba\.android\build-cache\934c0150558d26e3ace2425cd0f18f742a9779d0\output\jars\classes.jar"
+        jar="C:\Users\msuba\.android\build-cache\48b4880ef947a3f5d71db7f257679c96739a5c85\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="9a6350134db98fb39e212ddca5f0bad9280e8f3f">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2875ed3192492b18eb33f79ec5ed31afa1ae850d\classes.dex" />
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2344f85d554c0bc55c3bd06ba193bd490b6979e8\classes.dex" />
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\msuba\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.2.2\3c8f6018eaa72d43b261181e801e6f8676c16ef6\jackson-databind-2.2.2.jar"
+        jar="C:\Users\msuba\.android\build-cache\be81658d7413140782a353edacd6bf0c6cebf05e\output\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="25.0.2"
-        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
-        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\jackson-databind-2.2.2_a62cf26b87178d5fb1a2b92c9ed5553c5cbbefdb\classes.dex" />
+        sha1="84bf369090a8f7e293817efbd6ccf31ada1be32b">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_04e3e40eefa90a1ef4080f122e940fe2eeb34e18\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\5f2e4f8169345d80a7b3b3e82101bb7ddb3fca4e\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_15a65cbe055c77dcbedc8352179103d992c15047\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\4283c2cb962d060e0a98ebf627b5a0b9a0a993e3\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5628101b30a2b3f550a4a47f82edfcbe0cff067e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\56160ba1b21883ba05cb62f262f5dcb828add976\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="88848548ab56d4fbf3d2d1b0c85bf1ff9b4c1f4b">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b21d9b02cfa2acc114814c0247746f06b3960623\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\79de2075a7dc2a8ac00e745da482311f310b0e75\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0e4d53465cc141bec58f18a894e4c4e80633fa32">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_03f9101329e9208224db202a30be5f0ce02cd025\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="93a9f07dee45ba01d742d6527865ada59a60877e">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10000\instant-run-bootstrap_8d302fbdcc59eb8922d7dc4506c93e6d29f1e63c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\b741aa2d31c0219c03a0d042484c099cdf2990b8\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="a440fb3fec30ff925e9f601cc458fb6671834cb2">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_c0feafa6ea53d8e326059f8d1c6351edfade7e46\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\msuba\.android\build-cache\88308c3a760cb7767da6f579c2f36725ff3e5e56\output\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3b7173b3df4c7029699919414400041f64519e34">
+        <dex dex="C:\Users\msuba\Desktop\Attendance\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_2cbfeafbcf5a3c88a9a63dcc0a9db013b84939a9\classes.dex" />
     </item>
 
 </items>

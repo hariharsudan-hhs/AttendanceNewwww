@@ -5,7 +5,10 @@ package com.example.hhs.attendance;
  */
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -23,33 +26,46 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
 
 
-public class Classes extends Fragment {
+public class Classes extends Fragment
+{
 
+    Firebase fb_db1,fb_db2;
+    String BASE_URL = "https://attendance-79ba4.firebaseio.com/";
     private RecyclerView mRecyclerView;
+    String cls="";
     public static String cur_class="";
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private static String LOG_TAG = "Classes";
     ArrayList<String> clscontent=new ArrayList<>();
     ArrayList<DataObject> addlist=new ArrayList<>();
-
+    String CID;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
+
         View view = inflater.inflate(R.layout.classes,container,false);
 
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        CID = pref.getString("CID","");
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MyRecyclerViewAdapter(addlist);
         mRecyclerView.setAdapter(mAdapter);
+        Firebase.setAndroidContext(getContext());
+        new MyTask1().execute();
         final Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Ubuntu-R.ttf");
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
@@ -63,7 +79,6 @@ public class Classes extends Fragment {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                         getActivity());
 
-                // set prompts.xml to alertdialog builder
                 alertDialogBuilder.setView(promptsView);
 
                 final EditText userInput = (EditText) promptsView
@@ -72,39 +87,43 @@ public class Classes extends Fragment {
                 textView1.setTypeface(face);
                 userInput.setTypeface(face);
 
-                // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
+                                         cls= userInput.getText().toString();
+                                        System.out.println("CLASS IS "+cls);
+                                        addlist.add(new DataObject(cls));
+                                        System.out.println("LIST OF CLS IS "+addlist);
+                                        new MyTask().execute();
+
+                                        mAdapter = new MyRecyclerViewAdapter(addlist);
+                                        mRecyclerView.setAdapter(mAdapter);
+//                                        DataObject obj = new DataObject(cls);
+//                                        ((MyRecyclerViewAdapter) mAdapter).addItem(obj, 0);
 
                                     }
                                 })
                         .setNegativeButton("Cancel",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
+
                                         dialog.cancel();
+
                                     }
                                 });
 
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
 
-                // show it
+
+                AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
 
             }
         });
 
-        // Code to Add an item with default animation
-        //((MyRecyclerViewAdapter) mAdapter).addItem(obj, index);
 
-        // Code to remove an item with default animation
-        //((MyRecyclerViewAdapter) mAdapter).deleteItem(index);
 
         return view;
     }
@@ -150,6 +169,76 @@ public class Classes extends Fragment {
                 return false;
             }
         });
+    }
+
+    private class MyTask extends AsyncTask<String, Integer, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            fb_db1=new Firebase(BASE_URL);
+
+            System.out.println("LUNA ");
+            ClassAdapter classAdapter = new ClassAdapter();
+
+            classAdapter.setClas(cls);
+            System.out.println("CID "+CID);
+            fb_db1.child(CID).child(cls).setValue(classAdapter);
+            return "SUCCESS";
+
+
+        }
+
+    }
+
+
+
+    private class MyTask1 extends AsyncTask<String, Integer, String>
+    {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            String URL = BASE_URL+CID+"/";
+            System.out.println("BASE URL IS "+URL);
+            fb_db2=new Firebase(URL);
+
+            fb_db2.addListenerForSingleValueEvent(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    System.out.println("INVO ");
+                    addlist.clear();
+                    for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                    {
+
+                        System.out.println("fuck is "+postSnapshot.getKey());
+                        addlist.add(new DataObject(postSnapshot.getKey()));
+                        mAdapter = new MyRecyclerViewAdapter(addlist);
+                        mRecyclerView.setAdapter(mAdapter);
+                    }
+
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError)
+                {
+                    System.out.println("FIREBASE ERROR OCCURED");
+
+                }
+
+            });
+
+
+            return "SUCCESS";
+        }
+
     }
 
 }
