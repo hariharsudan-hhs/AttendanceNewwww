@@ -12,25 +12,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+
 import java.util.ArrayList;
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAdapter
+public class MyRecyclerViewAdapterStud extends RecyclerView.Adapter<MyRecyclerViewAdapterStud
         .DataObjectHolder> {
     private static String LOG_TAG = "MyRecyclerViewAdapter";
-    private ArrayList<DataObject> mDataset;
+    private ArrayList<DataObject> mDataset,mDataset2;
     private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
         TextView label;
+        TextView label2;
 
         public DataObjectHolder(View itemView) {
             super(itemView);
             label = (TextView) itemView.findViewById(R.id.textView);
+            label2 = (TextView) itemView.findViewById(R.id.textView2);
             Log.i(LOG_TAG, "Adding Listener");
             itemView.setOnClickListener(this);
 
@@ -49,8 +52,10 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     }
 
 
-    public MyRecyclerViewAdapter(ArrayList<DataObject> myDataset) {
+    public MyRecyclerViewAdapterStud(ArrayList<DataObject> myDataset)
+    {
         mDataset = myDataset;
+        //mDataset2 = myDataset2;
     }
 
     @Override
@@ -66,7 +71,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<MyRecyclerViewAd
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
         Typeface face= Typeface.createFromAsset(holder.itemView.getContext().getAssets(), "fonts/Ubuntu-R.ttf");
-        holder.label.setText(mDataset.get(position).getmText1());
+        holder.label2.setText(mDataset.get(position).getmText1());
+        holder.label.setText(mDataset.get(position).getmText2());
         holder.label.setTypeface(face);
         holder.itemView.setLongClickable(true);
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

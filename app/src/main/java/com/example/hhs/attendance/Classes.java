@@ -40,7 +40,6 @@ public class Classes extends Fragment
 {
 
     Firebase fb_db1,fb_db2;
-    String BASE_URL = "https://attendance-79ba4.firebaseio.com/";
     private RecyclerView mRecyclerView;
     String cls="";
     public static String cur_class="";
@@ -49,6 +48,8 @@ public class Classes extends Fragment
     private static String LOG_TAG = "Classes";
     ArrayList<String> clscontent=new ArrayList<>();
     ArrayList<DataObject> addlist=new ArrayList<>();
+    String BASE_URL = "https://attendance-79ba4.firebaseio.com/";
+
     String CID;
     @Nullable
     @Override
@@ -148,6 +149,7 @@ public class Classes extends Fragment
             public void onItemClick(int position, View v) {
                 Log.i(LOG_TAG, " Clicked on Item " + position+addlist.get(position).getmText1());
                 cur_class=addlist.get(position).getmText1();
+                System.out.println("CUR CLASS IS "+cur_class);
                 Fragment fragment= new Students();
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.content_frame, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
@@ -206,7 +208,7 @@ public class Classes extends Fragment
             System.out.println("BASE URL IS "+URL);
             fb_db2=new Firebase(URL);
 
-            fb_db2.addListenerForSingleValueEvent(new ValueEventListener()
+            fb_db2.addValueEventListener(new ValueEventListener()
             {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot)
