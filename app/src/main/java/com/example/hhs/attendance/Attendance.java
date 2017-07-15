@@ -6,10 +6,13 @@ package com.example.hhs.attendance;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -31,6 +34,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -44,9 +52,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-/**
- * Created by Belal on 18/09/16.
- */
+import static android.content.Context.MODE_PRIVATE;
+import static android.content.Context.UI_MODE_SERVICE;
+import static com.example.hhs.attendance.Classes.cur_class;
+
+
 
 
 public class Attendance extends Fragment {
@@ -58,8 +68,10 @@ public class Attendance extends Fragment {
     private static String LOG_TAG = "Attendance";
     public SeekBar seekBar;
     int atthour=1;
-    String attdate;
     EditText editText2;
+
+    Firebase fb_db1,fb_db2;
+    String BASE_URL = "https://attendance-79ba4.firebaseio.com/";
 
     public static String select="";
     public static boolean init=false;
@@ -67,18 +79,35 @@ public class Attendance extends Fragment {
     ArrayList<String> stucontent=new ArrayList<>();
     ArrayList<String> subcontent=new ArrayList<>();
     ArrayList<DataObject> addlist=new ArrayList<>();
+
+    ArrayList<String> Clslist = new ArrayList<>();
+    ArrayList<String> Sublist = new ArrayList<>();
+
+    ArrayList<String> Studlist = new ArrayList<>();
+
+    Spinner spinner,spinner2;
+
     ArrayList<String>attlist;
     int stusize;
     String date;
+    String CID;
+    String Uname;
+    Typeface face;
+
+    String CurClass,CurSubj,CurDate,CurHour;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        CID = pref.getString("CID","");
+        Uname = pref.getString("uname","");
         View view = inflater.inflate(R.layout.attendance, container, false);
         TextView save = (TextView) view.findViewById(R.id.save);
-
+        CurHour="1";
+        Firebase.setAndroidContext(getActivity());
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
@@ -86,7 +115,7 @@ public class Attendance extends Fragment {
         mAdapter = new MyRecyclerViewAdapter2(new ArrayList<DataObject>(),0);
 //        mRecyclerView.setAdapter(mAdapter);
 
-        Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Ubuntu-R.ttf");
+        face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Ubuntu-R.ttf");
 
         save.setTypeface(face);
         save.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +142,15 @@ public class Attendance extends Fragment {
                             System.out.println("Now"+stucontent.get(i)+" is"+attlist.get(i));
                         }
 
+                        System.out.println("***** "+CurClass);
+                        System.out.println("***** "+CurSubj);
+                        System.out.println("***** "+CurDate);
+                        System.out.println("***** "+CurHour);
+                        System.out.println("***** "+select);
+                        System.out.println("LOL FUCK IS "+MyRecyclerViewAdapter2.retlist);
+
+                        new MyTask5().execute();
+
                         dialog.dismiss();
                     }
                 });
@@ -133,50 +171,25 @@ public class Attendance extends Fragment {
         // set prompts.xml to alertdialog builder
         alertDialogBuilder.setView(promptsView);
 
-        final Spinner spinner = (Spinner) promptsView.findViewById(R.id.spinner);
-        final Spinner spinner2 = (Spinner) promptsView.findViewById(R.id.spinner2);
-        TextView textView4 = (TextView) promptsView.findViewById(R.id.textView4);
+        spinner2 = (Spinner) promptsView.findViewById(R.id.spinner2);
         TextView textView5 = (TextView) promptsView.findViewById(R.id.textView5);
         TextView textView6 = (TextView) promptsView.findViewById(R.id.textView6);
-        ArrayAdapter<String>obj=new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,clscontent);
 
-        ArrayAdapter<String>obj2=new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,subcontent);
+          spinner = (Spinner) promptsView.findViewById(R.id.spinner);
+        TextView textView4 = (TextView) promptsView.findViewById(R.id.textView4);
 
-        attdate=new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+//        obj.notifyDataSetChanged();
+        textView4.setTypeface(face);
+
+        CurDate=new SimpleDateFormat("dd-MM-yyyy").format(new Date());
         editText2 = (EditText) promptsView.findViewById(R.id.editText2);
         editText2.setTypeface(face);
         final TextView textView7 = (TextView) promptsView.findViewById(R.id.textView7);
         textView7.setTypeface(face);
-        textView4.setTypeface(face);
         textView5.setTypeface(face);
         textView6.setTypeface(face);
-        editText2.setText(attdate);
+        editText2.setText(CurDate);
         FloatingActionButton fab2 = (FloatingActionButton) promptsView.findViewById(R.id.fab2);
-
-
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
 
 
@@ -196,8 +209,8 @@ public class Attendance extends Fragment {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    textView7.setText("Hour : "+(progress+1));
-                atthour=progress+1;
+                textView7.setText("Hour : "+(progress+1));
+                CurHour=Integer.toString(progress+1);
             }
 
             @Override
@@ -215,8 +228,11 @@ public class Attendance extends Fragment {
                 .setCancelable(false)
                 .setPositiveButton("OK",
                         new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
+                            public void onClick(DialogInterface dialog,int id)
+                            {
 
+
+                                CurDate = editText2.getText().toString();
                                 LayoutInflater li = LayoutInflater.from(getActivity());
                                 View promptsView2 = li.inflate(R.layout.max_select, null);
 
@@ -264,13 +280,19 @@ public class Attendance extends Fragment {
                                 alertDialogBuilder2
                                         .setCancelable(false)
                                         .setPositiveButton("OK",
-                                                new DialogInterface.OnClickListener() {
-                                                    public void onClick(DialogInterface dialog, int id) {
-                                                        mAdapter = new MyRecyclerViewAdapter2(addlist,stusize);
-                                                        mRecyclerView.setAdapter(mAdapter);
+                                                new DialogInterface.OnClickListener()
+                                                {
+
+                                                    public void onClick(DialogInterface dialog, int id)
+                                                    {
+
+
+                                                        //list setting
+                                                        new MyTask3().execute();
+
                                                         dialog.dismiss();
                                                     }
-                                                    });
+                                                });
 
 
                                 // create alert dialog
@@ -295,7 +317,8 @@ public class Attendance extends Fragment {
         // show it
         alertDialog.show();
 
-
+        new MyTask().execute();
+        new MyTask2().execute();
 
         return view;
     }
@@ -354,6 +377,7 @@ public class Attendance extends Fragment {
         date.show(getFragmentManager(), "Date Picker");
     }
 
+
     DatePickerDialog.OnDateSetListener ondate = new DatePickerDialog.OnDateSetListener() {
 
         @Override
@@ -364,8 +388,225 @@ public class Attendance extends Fragment {
             editText2.setText(String.valueOf(mFormat.format(Double.valueOf(dayOfMonth))) + "-" + String.valueOf(mFormat.format(Double.valueOf(month+1)))
                     + "-" + String.valueOf(mFormat.format(Double.valueOf(year))));
 
-            attdate=String.valueOf(mFormat.format(Double.valueOf(dayOfMonth))) + "-" + String.valueOf(mFormat.format(Double.valueOf(month+1)))
+            CurDate=String.valueOf(mFormat.format(Double.valueOf(dayOfMonth))) + "-" + String.valueOf(mFormat.format(Double.valueOf(month+1)))
                     + "-" + String.valueOf(mFormat.format(Double.valueOf(year)));
         }
     };
+
+
+
+
+
+    private class MyTask extends AsyncTask<String, Integer, String>
+    {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            Clslist.clear();
+            String URL = BASE_URL+CID+"/";
+            System.out.println("BASE URL IS "+URL);
+            fb_db2=new Firebase(URL);
+
+            fb_db2.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    System.out.println("INVOKER ");
+                    //addlist.clear();
+                    for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                    {
+                        if(!postSnapshot.getKey().equals("clas"))
+                        {
+                            System.out.println("LOLYYYY "+postSnapshot.getKey());
+                            Clslist.add(postSnapshot.getKey());
+                        }
+
+                    }
+                    ArrayAdapter<String> obj=new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,Clslist);
+                    spinner.setAdapter(obj);
+                    obj.notifyDataSetChanged();
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            System.out.println("GG "+spinner.getSelectedItem().toString());
+                            CurClass = spinner.getSelectedItem().toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError)
+                {
+                    System.out.println("FIREBASE ERROR OCCURED");
+
+                }
+
+            });
+
+
+            return "SUCCESS";
+        }
+
+
+
+    }
+    private class MyTask2 extends AsyncTask<String, Integer, String>  {
+
+
+        @Override
+        protected String doInBackground(String... params)
+        {
+
+
+
+            Sublist.clear();
+            String URL = BASE_URL+"ColgSubj/"+CID+"/"+Uname+"/";
+            System.out.println("BASE URL for subject IS "+URL);
+            fb_db1=new Firebase(URL);
+
+            fb_db1.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    System.out.println("INVOKER ");
+                    //addlist.clear();
+                    for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                    {
+                        SubjAdapter subjAdapter = postSnapshot.getValue(SubjAdapter.class);
+                        System.out.println("NEW NOOB IS "+subjAdapter.Subname);
+                        Sublist.add(subjAdapter.Subname);
+                    }
+
+
+
+                    ArrayAdapter<String> obj2=new ArrayAdapter<String>(getContext(),R.layout.support_simple_spinner_dropdown_item,Sublist);
+                    spinner2.setAdapter(obj2);
+                    obj2.notifyDataSetChanged();
+
+                    spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                            System.out.println("GG*** "+spinner2.getSelectedItem().toString());
+                            CurSubj = spinner2.getSelectedItem().toString();
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> parent) {
+
+                        }
+                    });
+
+
+
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError)
+                {
+                    System.out.println("FIREBASE ERROR OCCURED");
+
+                }
+
+            });
+
+
+            return "SUCCESS";
+        }
+
+
+
+    }
+
+
+    private class MyTask3 extends AsyncTask<String, Integer, String>
+    {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            Clslist.clear();
+            String URL = BASE_URL+CID+"/"+CurClass+"/";
+            System.out.println("BASE URL IS "+URL);
+            fb_db2=new Firebase(URL);
+
+            fb_db2.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    System.out.println("INVOKER ");
+                    Studlist.clear();
+                    for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                    {
+                        if(!postSnapshot.getKey().equals("clas"))
+                        {
+                            StudAdapter studAdapter = postSnapshot.getValue(StudAdapter.class);
+                            String Stud = studAdapter.SID;
+                            System.out.println("Adding Student is "+Stud);
+                            addlist.add(new DataObject(Stud));
+                            Studlist.add(Stud);
+
+                        }
+
+
+                    }
+                    mAdapter = new MyRecyclerViewAdapter2(addlist,addlist.size());
+                    mRecyclerView.setAdapter(mAdapter);
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError)
+                {
+                    System.out.println("FIREBASE ERROR OCCURED");
+
+                }
+
+            });
+
+
+            return "SUCCESS";
+        }
+
+
+
+    }
+
+    private class MyTask5 extends AsyncTask<String, Integer, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            String BASE_URL1 = BASE_URL;
+            fb_db1=new Firebase(BASE_URL1);
+            System.out.println("CLASS URL IS "+BASE_URL1);
+
+            System.out.println("LUNA ");
+            String Node = Uname+"_"+CurClass+"_"+CurSubj+"_"+CurDate+"_"+CurHour;
+            System.out.println("NODE IS "+Node);
+            AttendanceAdapter attadapter = new AttendanceAdapter();
+            attadapter.StudList=Studlist;
+            attadapter.StudAttendance=MyRecyclerViewAdapter2.retlist;
+            fb_db1.child("Attendance").child(CID).child(Node).setValue(attadapter);
+            return "SUCCESS";
+
+
+        }
+
+    }
+
+
+
 }

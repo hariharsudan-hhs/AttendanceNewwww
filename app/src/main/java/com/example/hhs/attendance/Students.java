@@ -230,11 +230,6 @@ public class Students extends Fragment {
 
 
                         }
-
-
-//                        addlist.add(new DataObject(postSnapshot.getKey()));
-//                        mAdapter = new MyRecyclerViewAdapter(addlist);
-//                        mRecyclerView.setAdapter(mAdapter);
                     }
 
                     mAdapter = new MyRecyclerViewAdapterStud(addlist);

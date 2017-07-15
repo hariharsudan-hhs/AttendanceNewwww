@@ -5,7 +5,9 @@ package com.example.hhs.attendance;
  */
 
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -23,6 +25,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.client.DataSnapshot;
+import com.firebase.client.Firebase;
+import com.firebase.client.FirebaseError;
+import com.firebase.client.ValueEventListener;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -31,9 +38,8 @@ import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-/**
- * Created by Belal on 18/09/16.
- */
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.hhs.attendance.Classes.cur_class;
 
 
 public class Subject extends Fragment {
@@ -44,7 +50,9 @@ public class Subject extends Fragment {
     private static String LOG_TAG = "Subjects";
     ArrayList<String> subcontent=new ArrayList<>();
     ArrayList<DataObject> addlist=new ArrayList<>();
-
+    Firebase fb_db1,fb_db2;
+    String BASE_URL = "https://attendance-79ba4.firebaseio.com/";
+    String CID,Username,Subname,Scode;
 
     @Nullable
     @Override
@@ -53,12 +61,19 @@ public class Subject extends Fragment {
         //change R.layout.yourlayoutfilename for each of your fragments
         View view = inflater.inflate(R.layout.subjects, container, false);
 
+        SharedPreferences pref = getActivity().getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
+        CID = pref.getString("CID","");
+        Username = pref.getString("uname","");
+
+        Firebase.setAndroidContext(getContext());
+        new MyTask1().execute();
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.my_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MyRecyclerViewAdapter(addlist);
+        mAdapter = new MyRecyclerViewAdapterStud(addlist);
         mRecyclerView.setAdapter(mAdapter);
 
         final Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Ubuntu-R.ttf");
@@ -80,15 +95,25 @@ public class Subject extends Fragment {
                 final EditText userInput = (EditText) promptsView
                         .findViewById(R.id.editTextDialogUserInput);
                 TextView textView1 = (TextView) promptsView.findViewById(R.id.textView1);
-                textView1.setTypeface(face);
+
+                final EditText userInput2 = (EditText) promptsView
+                        .findViewById(R.id.editTextDialogUserInput2);
+                TextView textView2 = (TextView) promptsView.findViewById(R.id.textView2);
+                textView2.setTypeface(face);
                 // set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
+                                    public void onClick(DialogInterface dialog,int id)
+                                    {
+
+                                        Subname = userInput.getText().toString();
+                                        Scode = userInput2.getText().toString();
+                                        addlist.add(new DataObject(Subname));
+                                        new MyTask().execute();
+                                        mAdapter=new MyRecyclerViewAdapterStud(addlist);
+                                        mRecyclerView.setAdapter(mAdapter);
 
                                         
                                     }
@@ -131,7 +156,7 @@ public class Subject extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MyRecyclerViewAdapter) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapter
+        ((MyRecyclerViewAdapterStud) mAdapter).setOnItemClickListener(new MyRecyclerViewAdapterStud
                 .MyClickListener() {
             @Override
             public void onItemClick(int position, View v) {
@@ -153,6 +178,83 @@ public class Subject extends Fragment {
                 return false;
             }
         });
+    }
+
+    private class MyTask extends AsyncTask<String, Integer, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            fb_db1=new Firebase(BASE_URL);
+            System.out.println("CLASS URL IS "+BASE_URL);
+
+            System.out.println("LUNA ");
+            SubjAdapter subjAdapter = new SubjAdapter(Subname,Scode);
+            fb_db1.child("ColgSubj").child(CID).child(Username).child(Scode).setValue(subjAdapter);
+            return "SUCCESS";
+
+
+        }
+
+    }
+    private class MyTask1 extends AsyncTask<String, Integer, String>
+    {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            String URL = "https://attendance-79ba4.firebaseio.com/ColgSubj/"+CID+"/"+Username+"/";
+
+            System.out.println("BASE URL IS "+URL);
+            fb_db2=new Firebase(URL);
+
+            fb_db2.addValueEventListener(new ValueEventListener()
+            {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot)
+                {
+                    System.out.println("INVOKER ");
+                    addlist.clear();
+                    for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                    {
+
+                        SubjAdapter subjAdapter;
+                        System.out.println("fuck is "+postSnapshot.getKey());
+                        if(!(postSnapshot.getKey().equals("clas")))
+                        {
+                            subjAdapter  = postSnapshot.getValue(SubjAdapter.class);
+                            System.out.println("ASDFASDF"+subjAdapter.Subname);
+                            System.out.println("ASDFASDF"+subjAdapter.Subcode);
+                            String subcde=subjAdapter.Subcode;
+                            String subnme = subjAdapter.Subname;
+                            addlist.add(new DataObject(subnme,subcde));
+                            //addlist2.add(new DataObject(studname));
+
+
+                        }
+                    }
+
+                    mAdapter = new MyRecyclerViewAdapterStud(addlist);
+                    mRecyclerView.setAdapter(mAdapter);
+
+                }
+
+                @Override
+                public void onCancelled(FirebaseError firebaseError)
+                {
+                    System.out.println("FIREBASE ERROR OCCURED");
+
+                }
+
+            });
+
+
+            return "SUCCESS";
+        }
+
     }
 
 
