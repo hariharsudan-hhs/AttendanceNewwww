@@ -62,7 +62,7 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     }
 
 
-    public MyRecyclerViewAdapter3(ArrayList<String> attlist, ArrayList<String> stulist) {
+    public MyRecyclerViewAdapter3(ArrayList<String> stulist, ArrayList<String> attlist) {
        // mDataset = attlist;
         this.attlist=new ArrayList<>(attlist);
         stusize=stulist.size();

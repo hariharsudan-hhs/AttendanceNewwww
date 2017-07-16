@@ -98,7 +98,6 @@ public String attclass="",attsubject="";
         //returning our layout file
         //change R.layout.yourlayoutfilename for each of your fragments
         View view = inflater.inflate(R.layout.past_attendance, container, false);
-        TextView update = (TextView) view.findViewById(R.id.update);
         tclass = (TextView) view.findViewById(R.id.textView10);
         thour = (TextView) view.findViewById(R.id.textView11);
         tdate = (TextView) view.findViewById(R.id.textView12);
@@ -111,17 +110,17 @@ public String attclass="",attsubject="";
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
         //mAdapter = new MyRecyclerViewAdapter3(new ArrayList<DataObject>(),attcontent);
-        stats = (FloatingActionButton) view.findViewById(R.id.stats);
-        stats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment= new Stats();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.content_frame, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
-                transaction.addToBackStack(null);  // this will manage backstack
-                transaction.commit();
-            }
-        });
+//        stats = (FloatingActionButton) view.findViewById(R.id.stats);
+//        stats.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Fragment fragment= new Stats();
+//                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+//                transaction.replace(R.id.content_frame, fragment); // fragment container id in first parameter is the  container(Main layout id) of Activity
+//                transaction.addToBackStack(null);  // this will manage backstack
+//                transaction.commit();
+//            }
+//        });
 //        mRecyclerView.setAdapter(mAdapter);
 
         Typeface face= Typeface.createFromAsset(getActivity().getAssets(), "fonts/Ubuntu-R.ttf");
@@ -129,38 +128,7 @@ public String attclass="",attsubject="";
         thour.setTypeface(face);
         tdate.setTypeface(face);
         tsubject.setTypeface(face);
-        update.setTypeface(face);
-        update.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(v.getContext());
-
-                // Setting Dialog Title
-                alertDialog.setTitle("Update Attendance");
-
-                // Setting Dialog Message
-                alertDialog.setMessage("Are you sure to save your changes ?");
-
-                // Setting Positive "Yes" Button
-                alertDialog.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        attlist=new ArrayList<String>(MyRecyclerViewAdapter3.ret_list());
-                        System.out.println("GOna print"+stusize);
-                        for(int i=0;i<stusize;i++)
-                        {
-                            System.out.println("Now"+stucontent.get(i)+" is"+attlist.get(i));
-                        }
-
-                        dialog.dismiss();
-                    }
-                });
-
-                // Showing Alert Message
-                alertDialog.show();
-
-            }
-        });
         //date=new SimpleDateFormat("dd-MM-yyyy").format(new Date());
 
          alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -476,12 +444,12 @@ public String attclass="",attsubject="";
                         attcontent = adapter.StudAttendance;
                         stucontent = adapter.StudList;
                         //addlist.add(new DataObject());
-                        System.out.println("NOWW PRITNIGN "+attcontent+" and "+ stucontent);
+                        System.out.println("NOWW PRITNIGN "+stucontent+" and "+ attcontent);
 
 
                     }
 
-                    mAdapter = new MyRecyclerViewAdapter3(attcontent,stucontent);
+                    mAdapter = new MyRecyclerViewAdapter3(stucontent,attcontent);
                     mRecyclerView.setAdapter(mAdapter);
 
                 }
