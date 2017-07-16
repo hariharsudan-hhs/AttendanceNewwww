@@ -62,15 +62,16 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     }
 
 
-    public MyRecyclerViewAdapter3(ArrayList<DataObject> myDataset, ArrayList<String>attlist) {
-        mDataset = myDataset;
+    public MyRecyclerViewAdapter3(ArrayList<String> attlist, ArrayList<String> stulist) {
+       // mDataset = attlist;
         this.attlist=new ArrayList<>(attlist);
-        stusize=attlist.size();
+        stusize=stulist.size();
         checklist=new String[stusize];
         for(int i=0;i<stusize;i++)
         {
             checklist[i]=attlist.get(i);
         }
+
 
     }
 
@@ -87,7 +88,7 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     @Override
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         Typeface face= Typeface.createFromAsset(holder.itemView.getContext().getAssets(), "fonts/Ubuntu-R.ttf");
-        holder.label.setText(mDataset.get(position).getmText1());
+        holder.label.setText(attlist.get(position));
         holder.label.setTypeface(face);
         holder.itemView.setLongClickable(true);
 
@@ -157,7 +158,7 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return stusize;
     }
 
     public interface MyClickListener {
