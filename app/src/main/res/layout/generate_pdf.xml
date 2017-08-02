@@ -3,4 +3,44 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/genbut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GEnerate"
+        android:layout_marginBottom="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <Spinner
+        android:id="@+id/classspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="42dp" />
+
+    <Spinner
+        android:id="@+id/subjspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:layout_below="@+id/classspinner"
+        android:layout_alignParentStart="true" />
+
+    <Spinner
+        android:id="@+id/datespinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/subjspinner"
+        android:layout_marginTop="76dp" />
+
+    <Spinner
+        android:id="@+id/hourspinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/genbut"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="59dp" />
 </RelativeLayout>

@@ -36,14 +36,20 @@ public class SendSMS extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //you can set the title for your toolbar here for different fragments different titles
-        SharedPreferences pref2 = getActivity().getSharedPreferences("MyPref3", MODE_PRIVATE);
-        SharedPreferences.Editor editor = pref2.edit();
+        SharedPreferences pref = getActivity().getSharedPreferences("MyPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        editor.putString("CID","");
+        editor.putString("Cname","");
+        editor.putString("islogin","");
+        editor.putString("uname","");
+        editor.putString("gender","");
 
-        editor.putBoolean("isFirstTime",false);
+
+
         editor.commit();
         getActivity().setTitle("Logout");
         getActivity().finish();
-        startActivity(new Intent(getActivity(),StartingActivity.class));
+        startActivity(new Intent(getActivity(),CollegeID.class));
 
     }
 }

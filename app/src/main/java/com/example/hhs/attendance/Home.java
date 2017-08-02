@@ -152,21 +152,27 @@ public class Home extends AppCompatActivity
         switch (itemId) {
             case R.id.nav_classes:
                 fragment = new Classes();
+                System.out.println("Clicking classes");
                 break;
             case R.id.nav_subject:
                 fragment = new Subject();
+                System.out.println("Clicking subjects");
                 break;
             case R.id.nav_attendance:
                 fragment = new Attendance();
+                System.out.println("New Attendance");
                 break;
             case R.id.nav_past:
                 fragment = new PastAttendance();
+                System.out.println("Past Attendance");
                 break;
             case R.id.nav_pdf:
                 fragment = new PDF();
+                System.out.println("Settings");
                 break;
             case R.id.nav_send:
                 fragment = new SendSMS();
+                System.out.println("logoutttttttt");
                 break;
         }
 
