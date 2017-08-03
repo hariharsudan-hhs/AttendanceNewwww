@@ -15,6 +15,8 @@ public class AttendanceAdapter
         this.StudList=Studlist;
         this.StudAttendance =StudAttendance;
     }
+
+
     public ArrayList<String> StudList;
     public ArrayList<String> StudAttendance;
 

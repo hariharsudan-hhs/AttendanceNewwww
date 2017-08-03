@@ -59,6 +59,7 @@ public class StartingActivity2 extends AppCompatActivity {
                     editor.commit();
                     Intent i = new Intent(StartingActivity2.this,Home.class);
                     startActivity(i);
+                    StartingActivity2.this.finish();
                 }
 
             }
