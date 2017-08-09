@@ -15,9 +15,22 @@
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="83dp"
         tools:layout_editor_absoluteY="94dp"
+        android:layout_marginTop="85dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="83dp" />
+        android:layout_centerHorizontal="true" />
+    <EditText
+        android:id="@+id/pass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="83dp"
+        tools:layout_editor_absoluteY="94dp"
+        android:layout_marginTop="38dp"
+        android:layout_below="@+id/colgid"
+        android:layout_alignStart="@+id/colgid" />
+
 
     <Button
         android:id="@+id/colidsubmit"

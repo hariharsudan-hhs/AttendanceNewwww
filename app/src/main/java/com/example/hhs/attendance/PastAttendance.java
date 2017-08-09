@@ -441,9 +441,10 @@ public String attclass="",attsubject="";
                         System.out.println("jhgkhjgjh");
                         AttendanceAdapter adapter = postSnapshot.getValue(AttendanceAdapter.class);
                         System.out.println("NOOBIE "+adapter.StudAttendance+"   "+adapter.StudList);
-                        attcontent = adapter.StudAttendance;
+//                        attcontent = adapter.StudAttendance;
+//                        stucontent = adapter.StudList;
                         stucontent = adapter.StudList;
-                        //addlist.add(new DataObject());
+                        attcontent = adapter.StudAttendance;
                         System.out.println("NOWW PRITNIGN "+stucontent+" and "+ attcontent);
 
 

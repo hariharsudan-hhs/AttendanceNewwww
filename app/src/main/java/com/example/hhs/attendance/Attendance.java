@@ -6,6 +6,7 @@ package com.example.hhs.attendance;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -601,6 +602,16 @@ public class Attendance extends Fragment {
             attadapter.StudAttendance=MyRecyclerViewAdapter2.retlist;
             fb_db1.child("Attendance").child(CID).child(Node).setValue(attadapter);
             return "SUCCESS";
+
+
+        }
+        @Override
+        protected void onPostExecute(String result)
+        {
+            Toast.makeText(getActivity(),"Attendance Successfuly Saved",Toast.LENGTH_SHORT).show();
+            Intent i = new Intent(getActivity(),Home.class);
+            startActivity(i);
+            getActivity().finish();
 
 
         }

@@ -21,8 +21,8 @@ public class CollegeID extends AppCompatActivity
     String BASE_URL = "https://attendance-79ba4.firebaseio.com/CollegeID/";
     EditText colgid;
     Button submit;
-    String ID;
-
+    String ID,pwd;
+    EditText pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,13 +42,23 @@ public class CollegeID extends AppCompatActivity
             Firebase.setAndroidContext(this);
             colgid = (EditText)findViewById(R.id.colgid);
             submit = (Button)findViewById(R.id.colidsubmit);
+            pass = (EditText)findViewById(R.id.pass);
 
             submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v)
                 {
                     ID = colgid.getText().toString();
-                    new MyTask().execute();
+                    pwd=pass.getText().toString();
+                    if(ID.equals("")||pwd.equals(""))
+                    {
+                        Toast.makeText(getApplicationContext(),"Please enter the credentials...",Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                    {
+                        new MyTask().execute();
+
+                    }
 
 
                 }
@@ -77,9 +87,10 @@ public class CollegeID extends AppCompatActivity
                         ColgIDAdapter colgIDAdapter = postSnapshot.getValue(ColgIDAdapter.class);
                         String S =colgIDAdapter.getID();
                         String name = colgIDAdapter.getName();
+                        String passss = colgIDAdapter.getPass();
                         System.out.println("LOL 1 IS "+S+"  "+name);
                         System.out.println("retrieved ID is "+S);
-                        if(ID.equals(S))
+                        if(ID.equals(S)&&(pwd.equals(passss)))
                         {
                             System.out.println("LOL 2 IS "+S+"  "+name);
                             editor.putString("CID",S);

@@ -22,6 +22,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -88,19 +89,62 @@ public class Classes extends Fragment
                 textView1.setTypeface(face);
                 userInput.setTypeface(face);
 
-                alertDialogBuilder
+                alertDialogBuilder.setPositiveButton("OK",null);
+                alertDialogBuilder.setNegativeButton("Cancel",null);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(final DialogInterface dialogInterface) {
+                        Button b = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                cls= userInput.getText().toString();
+                                if(cls.equals(""))
+                                {
+                                    Toast.makeText(getActivity(),"Please enter the Class name",Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    addlist.add(new DataObject(cls));
+                                    System.out.println("LIST OF CLS IS "+addlist);
+                                    new MyTask().execute();
+
+                                    mAdapter = new MyRecyclerViewAdapter(addlist);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                    dialogInterface.dismiss();
+                                }
+
+                            }
+                        });
+                    }
+                });
+
+
+              /*  alertDialogBuilder
                         .setCancelable(false)
                         .setPositiveButton("OK",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
+
                                          cls= userInput.getText().toString();
                                         System.out.println("CLASS IS "+cls);
-                                        addlist.add(new DataObject(cls));
-                                        System.out.println("LIST OF CLS IS "+addlist);
-                                        new MyTask().execute();
+                                        if(cls.equals(""))
+                                        {
+                                            Toast.makeText(getActivity(),"Please enter the Class name",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                        {
+                                            addlist.add(new DataObject(cls));
+                                            System.out.println("LIST OF CLS IS "+addlist);
+                                            new MyTask().execute();
 
-                                        mAdapter = new MyRecyclerViewAdapter(addlist);
-                                        mRecyclerView.setAdapter(mAdapter);
+                                            mAdapter = new MyRecyclerViewAdapter(addlist);
+                                            mRecyclerView.setAdapter(mAdapter);
+                                        }
+
 //                                        DataObject obj = new DataObject(cls);
 //                                        ((MyRecyclerViewAdapter) mAdapter).addItem(obj, 0);
 
@@ -115,9 +159,8 @@ public class Classes extends Fragment
                                     }
                                 });
 
+            */
 
-
-                AlertDialog alertDialog = alertDialogBuilder.create();
                 alertDialog.show();
 
 

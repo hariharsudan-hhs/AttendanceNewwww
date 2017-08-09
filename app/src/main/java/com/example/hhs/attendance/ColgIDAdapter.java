@@ -25,6 +25,16 @@ public class ColgIDAdapter
 
     public String name;
     public String ID;
+    public String pass;
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
     public ColgIDAdapter(){}
 
 

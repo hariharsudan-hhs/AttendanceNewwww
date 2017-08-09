@@ -20,8 +20,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
@@ -97,37 +99,86 @@ public class Students extends Fragment {
                         .findViewById(R.id.editTextDialogUserInput2);
                 TextView textView2 = (TextView) promptsView.findViewById(R.id.textView2);
                 textView2.setTypeface(face);
+
+                alertDialogBuilder.setPositiveButton("OK",null);
+                alertDialogBuilder.setNegativeButton("Cancel",null);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
+
+
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(final DialogInterface dialogInterface) {
+                        Button b = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Sname = userInput.getText().toString();
+                                SID = userInput2.getText().toString();
+                                if(Sname.equals("")||SID.equals(""))
+                                {
+                                    Toast.makeText(getActivity(),"Please enter the Student details",Toast.LENGTH_SHORT).show();
+                                }
+                                else
+                                {
+                                    System.out.println("STUD ID IS "+SID);
+                                    System.out.println("STUD NAME IS "+Sname);
+                                    addlist.add(new DataObject(Sname));
+                                    new MyTask().execute();
+                                    mAdapter=new MyRecyclerViewAdapterStud(addlist);
+                                    mRecyclerView.setAdapter(mAdapter);
+                                    dialogInterface.dismiss();
+
+
+                                }
+
+                            }
+                        });
+                    }
+                });
+
+
+
+
+
                 // set dialog message
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        // get user input and set it to result
-                                        // edit text
-                                        Sname = userInput.getText().toString();
-                                        SID = userInput2.getText().toString();
-                                        System.out.println("STUD ID IS "+SID);
-                                        System.out.println("STUD NAME IS "+Sname);
-                                        addlist.add(new DataObject(Sname));
-                                        new MyTask().execute();
-                                        mAdapter=new MyRecyclerViewAdapterStud(addlist);
-                                        mRecyclerView.setAdapter(mAdapter);
-
-
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
-
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
-
-                // show it
+//                alertDialogBuilder
+//                        .setCancelable(false)
+//                        .setPositiveButton("OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,int id) {
+//                                        // get user input and set it to result
+//                                        // edit text
+//                                        Sname = userInput.getText().toString();
+//                                        SID = userInput2.getText().toString();
+//                                        if(Sname.equals("")||SID.equals(""))
+//                                        {
+//                                            Toast.makeText(getActivity(),"Please enter the Student details",Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        else
+//                                        {
+//                                            System.out.println("STUD ID IS "+SID);
+//                                            System.out.println("STUD NAME IS "+Sname);
+//                                            addlist.add(new DataObject(Sname));
+//                                            new MyTask().execute();
+//                                            mAdapter=new MyRecyclerViewAdapterStud(addlist);
+//                                            mRecyclerView.setAdapter(mAdapter);
+//
+//                                        }
+//
+//
+//                                    }
+//                                })
+//                        .setNegativeButton("Cancel",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,int id) {
+//                                        dialog.cancel();
+//                                    }
+//                                });
+//
+//                // create alert dialog
+//                AlertDialog alertDialog = alertDialogBuilder.create();
+//
+//                // show it
                 alertDialog.show();
 
 

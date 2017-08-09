@@ -8,6 +8,7 @@ public class ClassAdapter
 {
     public ClassAdapter(){}
 
+
     public String getClas() {
         return clas;
     }

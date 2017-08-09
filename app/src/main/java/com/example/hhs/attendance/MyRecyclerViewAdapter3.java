@@ -26,6 +26,7 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     public  static ArrayList<String>retlist;
     private static MyClickListener myClickListener;
     public ArrayList<String>attlist;
+    public ArrayList<String>stulist;
 
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
@@ -65,6 +66,8 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     public MyRecyclerViewAdapter3(ArrayList<String> stulist, ArrayList<String> attlist) {
        // mDataset = attlist;
         this.attlist=new ArrayList<>(attlist);
+        this.stulist=new ArrayList<>(stulist);
+        System.out.println("INSIDE ADAPTER "+this.attlist+" and "+this.stulist);
         stusize=stulist.size();
         checklist=new String[stusize];
         for(int i=0;i<stusize;i++)
@@ -88,7 +91,7 @@ public class MyRecyclerViewAdapter3 extends RecyclerView.Adapter<MyRecyclerViewA
     @Override
     public void onBindViewHolder(final DataObjectHolder holder, final int position) {
         Typeface face= Typeface.createFromAsset(holder.itemView.getContext().getAssets(), "fonts/Ubuntu-R.ttf");
-        holder.label.setText(attlist.get(position));
+        holder.label.setText(stulist.get(position));
         holder.label.setTypeface(face);
         holder.itemView.setLongClickable(true);
 

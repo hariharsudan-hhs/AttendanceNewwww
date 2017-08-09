@@ -21,6 +21,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -101,32 +102,83 @@ public class Subject extends Fragment {
                 TextView textView2 = (TextView) promptsView.findViewById(R.id.textView2);
                 textView2.setTypeface(face);
                 // set dialog message
-                alertDialogBuilder
-                        .setCancelable(false)
-                        .setPositiveButton("OK",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id)
-                                    {
+                alertDialogBuilder.setPositiveButton("OK",null);
+                alertDialogBuilder.setNegativeButton("Cancel",null);
+                final AlertDialog alertDialog = alertDialogBuilder.create();
 
-                                        Subname = userInput.getText().toString();
+                alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+                    @Override
+                    public void onShow(final DialogInterface dialogInterface) {
+                        Button b = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+                        b.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+
+                                Subname = userInput.getText().toString();
                                         Scode = userInput2.getText().toString();
-                                        addlist.add(new DataObject(Subname));
-                                        new MyTask().execute();
-                                        mAdapter=new MyRecyclerViewAdapterStud(addlist);
-                                        mRecyclerView.setAdapter(mAdapter);
+                                        if(Subname.equals("")||Scode.equals(""))
+                                        {
+                                            Toast.makeText(getActivity(),"Please enter the Subject Details",Toast.LENGTH_SHORT).show();
+                                        }
+                                        else
+                                        {
+                                            addlist.add(new DataObject(Subname));
+                                            new MyTask().execute();
+                                            mAdapter=new MyRecyclerViewAdapterStud(addlist);
+                                            mRecyclerView.setAdapter(mAdapter);
+                                            alertDialog.dismiss();
+                                        }
 
-                                        
-                                    }
-                                })
-                        .setNegativeButton("Cancel",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog,int id) {
-                                        dialog.cancel();
-                                    }
-                                });
 
-                // create alert dialog
-                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                            }
+                        });
+                    }
+                });
+
+
+
+
+
+
+
+
+
+
+//                alertDialogBuilder
+//                        .setCancelable(false)
+//                        .setPositiveButton("OK",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,int id)
+//                                    {
+//
+//                                        Subname = userInput.getText().toString();
+//                                        Scode = userInput2.getText().toString();
+//                                        if(Subname.equals("")||Scode.equals(""))
+//                                        {
+//                                            Toast.makeText(getActivity(),"Please enter the Subject Details",Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        else
+//                                        {
+//                                            addlist.add(new DataObject(Subname));
+//                                            new MyTask().execute();
+//                                            mAdapter=new MyRecyclerViewAdapterStud(addlist);
+//                                            mRecyclerView.setAdapter(mAdapter);
+//                                        }
+//
+//
+//
+//                                    }
+//                                })
+//                        .setNegativeButton("Cancel",
+//                                new DialogInterface.OnClickListener() {
+//                                    public void onClick(DialogInterface dialog,int id) {
+//                                        dialog.cancel();
+//                                    }
+//                                });
+//
+//                // create alert dialog
+//                AlertDialog alertDialog = alertDialogBuilder.create();
 
                 // show it
                 alertDialog.show();

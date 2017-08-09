@@ -224,50 +224,10 @@ public class PDF extends Fragment
 
 
     }
-    public void CreatePDF()
-    {
-        System.out.println("IN PDF CREATOR");
-        Document document = new Document();
-        String fname = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
-        String path = Environment.getExternalStorageDirectory()+"/Attendance/"+fname+"_"+s+"_"+h+".pdf";
-        try {
-
-            System.out.println("LIST IS "+Subjlist.toString());
-
-            PdfWriter.getInstance(document,new FileOutputStream(path));
-            document.open();
-            document.add(new Paragraph("Class   :   "+c));
-            document.add(new Paragraph("Subject   :   "+s));
-            document.add(new Paragraph("Date   :   "+d));
-            document.add(new Paragraph("Hour   :   "+h));
-            document.add(new Paragraph("\n"));
-
-            PdfPTable table = new PdfPTable(2);
-            PdfPCell cell = new PdfPCell(new Phrase(fname));
-            cell.setColspan(3);
-            table.addCell(cell);
-
-            // we add the four remaining cells with addCell()
-//                        table.addCell("row 1; cell 1");
-//                        table.addCell("row 1; cell 2");
-//                        table.addCell("row 2; cell 1");
-//                        table.addCell("row 2; cell 2");
-            for(int i=0;i<stulist.size();i++)
-            {
-                table.addCell(stulist.get(i));
-                table.addCell(attlist.get(i));
-                System.out.println("Adding "+stulist.get(i));
-            }
-            document.add(table);
-            document.close();
-            System.out.println("BOWW 2");
-
-        } catch (Exception e)
-        {
-            System.out.println("EXCEPTION is "+e);
-        }
-
-    }
+//    public void CreatePDF()
+//    {
+//
+//    }
 
     private class MyTask2 extends AsyncTask<String, Integer, String>
     {
@@ -311,6 +271,51 @@ public class PDF extends Fragment
 
 
                     }
+                    System.out.println("LOL POST EXEC");
+//            CreatePDF();
+                    System.out.println("IN PDF CREATOR");
+                    Document document = new Document();
+                    String fname = new SimpleDateFormat("dd.MM.yyyy").format(new Date());
+                    String path = Environment.getExternalStorageDirectory()+"/Attendance/"+fname+"_"+s+"_"+h+".pdf";
+                    try {
+
+                        System.out.println("LIST IS "+Subjlist.toString());
+
+                        PdfWriter.getInstance(document,new FileOutputStream(path));
+                        document.open();
+                        document.add(new Paragraph("Class   :   "+c));
+                        document.add(new Paragraph("Subject   :   "+s));
+                        document.add(new Paragraph("Date   :   "+d));
+                        document.add(new Paragraph("Hour   :   "+h));
+                        document.add(new Paragraph("\n"));
+
+                        PdfPTable table = new PdfPTable(2);
+                        PdfPCell cell = new PdfPCell(new Phrase(fname));
+                        cell.setColspan(3);
+                        table.addCell(cell);
+
+                        // we add the four remaining cells with addCell()
+//                        table.addCell("row 1; cell 1");
+//                        table.addCell("row 1; cell 2");
+//                        table.addCell("row 2; cell 1");
+//                        table.addCell("row 2; cell 2");
+                        System.out.println("PDF * "+stulist+"  "+attlist);
+                        for(int i=0;i<stulist.size();i++)
+                        {
+                            table.addCell(stulist.get(i));
+                            table.addCell(attlist.get(i));
+                            System.out.println("Adding "+stulist.get(i));
+                        }
+                        document.add(table);
+                        document.close();
+                        System.out.println("BOWW 2");
+
+                    } catch (Exception e)
+                    {
+                        System.out.println("EXCEPTION is "+e);
+                    }
+
+
 
 
                 }
@@ -331,8 +336,7 @@ public class PDF extends Fragment
         @Override
         protected void onPostExecute(String result)
         {
-            System.out.println("LOL POST EXEC");
-            CreatePDF();
+            System.out.println("IN POST EXEC");
 
         }
 
